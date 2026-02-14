@@ -95,3 +95,7 @@ class NotificationSystem:
         print("[Metrics] Notification Processed")
         return True
 
+if __name__=="__main__":
+    notify = NotificationSystem()
+    notify.send_notification(notification_type='email',recipient='sanchit10gawde@gmail.com',message='HELLO WORLD!')
+
