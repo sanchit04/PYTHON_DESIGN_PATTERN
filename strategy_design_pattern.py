@@ -44,6 +44,8 @@ This behavioral part will change into a well defined strategy using ABC
     """
 
 from abc import ABC,abstractmethod
+import random
+import time
 
 class NotificationStrategy(ABC):
     @abstractmethod
@@ -92,5 +94,17 @@ class NotificationSystem:
             return False
 
         # Retry Logic (Still messy)
+        if random.choice([True,False]):
+            print("[WARNING] Temporary failure retrying...")
+            time.sleep(1)
+            print("[SUCCESS] sent after retry")
+        else:
+            print("[SUCCESS] sent successfully")
+
+        # METRICS
+        print("[Metrics] Notification Processed")
 
         return True
+
+if __name__=='__main__':
+    system = NotificationSystem()
