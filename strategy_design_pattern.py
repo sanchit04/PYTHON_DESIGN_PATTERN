@@ -88,5 +88,9 @@ class NotificationSystem:
             return False
 
         success=strategy.send(recipient=recipient,message=message)
+        if not success:
+            return False
+
+        # Retry Logic (Still messy)
 
         return True
