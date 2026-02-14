@@ -19,10 +19,18 @@ Needs:
 import random
 import time
 
+# VIOLATES SINGLE RESPONSIBILITY one class used for ALL!
+# VIOLATES interface segregation if tomorrow someone has to reuse send_notification for their usecase
+# Theyll have to use all the notifications which are current provided
 class NotificationSystem:
     def __init__(self):
         self.config=dict(email_provider="SendGrid",sms_provider="Twilio",push_provider="firebase")
 
+# LISKOV SUBSTITUTION theres no abstract polymorphism for this to violate
+# Since LISKOV is based upon how child class are coded when it comes to its parent class
+# with the current code theres only one class
+
+    # Violates SINGLE RESPONSIBILITY one class used for ALL!
     def send_notification(self,notification_type,recipient,message):
 
         # Logging
@@ -33,12 +41,20 @@ class NotificationSystem:
             print("[ERROR] Invalid Input")
             return False
 
+        # IF ELIF VIOLATES OPEN CLOSED PRINCIPLE
+        # TOMORROW IF I WANT TO ADD NEW NOTIFICATION SYSTEM I NEED TO UPDATE EXISTING CODE
+        # THAT VIOLATES OPEN CLOSED PRINCIPLE which says existing should not be modified but existing can be
+        # extended for a new functionality
+
         if notification_type=="email":
             # VALIDATION for EMAIL SENDING
             if "@" not in recipient:
                 print("[ERROR] Invalid Email Address")
                 return False
 
+            # DEPENDENCY INVERSION: Violation
+            # direct APIS are used we should ideally be pointing to base API class so that
+            # tomorrow if sendGridAPI changes to whatsappAPI its seamless.
             # HARDCODING OF sending of mail through sendgrid api
             print("[LOG] using SendGridApi")
             print(f"[sendgrid] sending email to {recipient}:{message}")
