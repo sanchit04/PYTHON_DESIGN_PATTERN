@@ -2,6 +2,9 @@
 
 
 """
+This behavioral part will change into a well defined strategy using ABC
+
+
 if notification_type == "email":
     # VALIDATION for EMAIL SENDING
     if "@" not in recipient:
@@ -37,9 +40,6 @@ elif notification_type == "push":
 else:
     print("[ERROR] unsupported notification type")
     return False
-
-
-This behavioral part will change into a well defined strategy using ABC
 
     """
 
@@ -108,3 +108,13 @@ class NotificationSystem:
 
 if __name__=='__main__':
     system = NotificationSystem()
+    email_strategy = EmailNotification()
+    sms_strategy = SMSNotification()
+    push_strategy = PushNotification()
+
+    system.send_notification(strategy=email_strategy,recipient="sanchit10gawde@gmail.com",message="Hello I am email")
+    system.send_notification(strategy=sms_strategy,recipient="9029187708",message="Hello I am text message")
+    system.send_notification(strategy=push_strategy,recipient="FRIDAY_USER",message="Hello i am firebase message")
+
+    #NEGATIVE:
+    system.send_notification(strategy=sms_strategy,recipient="abc@gmail",message="Hello I am text message")
