@@ -1,44 +1,24 @@
 """
-Even though we removed if-elif inside NotificationSystem,
-we pushed that decision to the caller.
+In this case we will target resource managers which can be initialized only once and used so that it becomes easy
+to manage and reduces the memory overhead
 
-The client is creating the objects instead all the object creation has to be done at one place in a factory.
+Eg in our case we have print statements which are written as loggers those are not extensible and if we need to change them
+in future we would have to change into multiple places thus we will create a singleton logger class which will be used
+for logging purpose
 
-EG from previous code:
+        print("[LOG] using SEND GRID API to send email")
+        print(f"[sendgrid] sent mail to recipient:{recipient} with message:{message}")
+        print("[LOG] using Twillio API to send email")
+        print(f"[twillio] sent message to recipient:{recipient} with message:{message}")
 
-if __name__=='__main__':
-    system = NotificationSystem()
-    email_strategy = EmailNotification()
-    sms_strategy = SMSNotification()
-    push_strategy = PushNotification()
-
-    system.send_notification(strategy=email_strategy,recipient="sanchit10gawde@gmail.com",message="Hello I am email")
-    system.send_notification(strategy=sms_strategy,recipient="9029187708",message="Hello I am text message")
-    system.send_notification(strategy=push_strategy,recipient="FRIDAY_USER",message="Hello i am firebase message")
-
-OR
-
-if notification_type == "email":
-    EmailNotification()
-elif notification_type == "sms":
-    SMSNotification()
-
-# In the above case theres direct violation of DIP Dependency Inversion Principle
-# Client is depending upon concrete classes EmailNotification(),SMSNotification()
-
-
-Use Factory Pattern when:
-    You see new or direct class instantiation scattered
-    Creation logic depends on a type or condition
-    You want to hide concrete classes from client
-    You want a single place to manage object creation
-    You want to reduce coupling
-
+change this to proper centralised logging class
 """
 
 from abc import ABC,abstractmethod
 import random
 import time
+
+
 
 # STRATEGY PATTERN
 class NotificationStrategy(ABC):
