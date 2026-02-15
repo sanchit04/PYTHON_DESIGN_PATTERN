@@ -18,6 +18,29 @@ from abc import ABC,abstractmethod
 import random
 import time
 
+class Logger:
+    # CLASS Variable is instance
+    _instance=None
+
+    def __new__(cls):
+        if cls._instance is None:
+            # IN THIS CASE object class is being called for which a new instance is being created and stored in
+            # _instance will store the value of the new object which is created
+            # now after this point whenever anyone calls Logger() if instance is present directly that will be provided
+            cls._instance = super(Logger,cls).__new__(cls)
+        return cls._instance
+
+    def log(self,message:str):
+        print(f"[LOG] {message}")
+
+    def error(self,message:str):
+        print(f"[ERROR] {message}")
+
+    def warning(self,message:str):
+        print(f"[WARNING] {message}")
+
+    def success(self,message:str):
+        print(f"[SUCCESS] {message}")
 
 
 # STRATEGY PATTERN
