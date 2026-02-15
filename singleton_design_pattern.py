@@ -129,7 +129,7 @@ if __name__=='__main__':
 
     system.send_notification(notification_type='email',recipient="sanchit10gawde@gmail.com",message="Hello I am email")
     system.send_notification(notification_type='sms',recipient="9029187708",message="Hello I am text message")
-    system.send_notification(notification_type='push',recipient="FRIDAY_USER",message="Hello i am firebase message")
+    system.send_notification(notification_type='push',recipient="FRIDAY_USER",message="Hello I am firebase message")
 
     #NEGATIVE:
     system.send_notification(notification_type='sms',recipient="abc@gmail",message="Hello I am text message")
