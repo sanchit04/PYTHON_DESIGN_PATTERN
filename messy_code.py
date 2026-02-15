@@ -91,7 +91,7 @@ class NotificationSystem:
             print("[SUCCESS] sent successfully")
 
 
-        # METRICS are me
+        # METRICS are mess
         print("[Metrics] Notification Processed")
         return True
 
