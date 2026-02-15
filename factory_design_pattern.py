@@ -1,5 +1,3 @@
-# WE WILL TRY TO GET RID OF BEHAVIORAL PATTERN done through condition if else statement in the messy code
-
 """
 Even though we removed if-elif inside NotificationSystem,
 we pushed that decision to the caller.
